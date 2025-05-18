@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="天天换心情，每天分享一首歌曲" />
+    <title>每日一歌网页背景音乐</title>
+    <style>
+      body {
+        width: fit-content; /* 内容自适应宽度 */
+        margin: 20px auto; /* 水平居中 + 上下边距 */
+        padding: 50px 30px; /* 内边距留出背景空间 */
+        background: url("https://p3.music.126.net/VVULHW8JG8-a_WGJbHbIlg==/79164837217490.jpg");
+      }
+      .center {
+        display: flex;
+        width: 500px;
+        height: 100px;
+        background: #00ff2f;
+        justify-content: center;
+        align-items: center;
+      }
+      button {
+        margin: 50px;
+        width: 80px;
+        height: 40px;
+      }
+      .cover {
+        z-index: -10;
+        /* 由于下面边界是一个整圆，所以宽高需相同为一个正方形 */
+        width: 400px; /* 新增 */
+        height: 400px; /* 新增 */
+        /* border-radius圆角大小，50%为一个整圆 */
+        border-radius: 50%;
+        padding: 6px;
+        background-color: #04ffdd;
+        position: absolute;
+        /* margin-top属性设置元素的上部边距，此播放器唱片封面样式稍微凸出一点点，所以为负值 */
+        margin-top: 50px;
+        margin-left: 50px;
+        /* 转动方式按照infinite linear无限线性（匀速）转动下去不停止 */
+        animation: zhuan 5s infinite linear;
+        /* paused暂停动画，running运行动画效果 */
+        animation-play-state: paused;
+      }
+
+      .fengmian {
+        width: 100%;
+        border-radius: 50%;
+      }
+      @keyframes zhuan {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="center">
+      <button id="bt">播放</button>
+      <button id="st">停止</button>
+      <button id="rs">重置</button>
+    </div>
+    <audio
+      src="https://m7.music.126.net/20250519002400/07da2b95c321a2de610772f86f69682c/ymusic/a7fe/19b5/ae9a/44e6e6ddab9fe4f1725daf998faa46f4.mp3"
+      type="audio"
+      id="bgm"
+      loop
+    ></audio>
+
+    <div class="cover">
+      <img
+        class="fengmian"
+        src="https://p3.music.126.net/VVULHW8JG8-a_WGJbHbIlg==/79164837217490.jpg"
+        alt="唱片封面"
+      />
+    </div>
+    <script>
+      var ebt = document.querySelector("#bt");
+      var cover = document.querySelector(".cover");
+      ebt.onclick = function () {
+        bgm.play();
+        cover.style.animationPlayState = "running";
+      };
+      var est = document.querySelector("#st");
+      est.onclick = function () {
+        bgm.pause();
+        cover.style.animationPlayState = "paused";
+      };
+      var ers = document.querySelector("#rs");
+      ers.onclick = function () {
+        bgm.load();
+        cover.style.animationPlayState = "paused";
+      };
+    </script>
+  </body>
+</html>
